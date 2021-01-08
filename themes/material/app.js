@@ -999,9 +999,9 @@ function markdown(el, data) {
     markdown(el, data);
     //});
   } else {
-    var markdown = $(data).html();
-    var html = md.render(markdown);
-    //var html = md.render(data);
+    //var markdown = $(data).html();
+    //var html = md.render(markdown);
+    var html = md.render(data);
     $(el).show().html(html);
   }
 }

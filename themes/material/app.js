@@ -904,7 +904,7 @@ function file_image(path) {
     </div>
 	<br>
 	<div class="mdui-textfield">
-	  <label class="mdui-textfield-label">下载地址</label>
+	  <label class="mdui-textfield-label">下載鏈接</label>
 	  <input class="mdui-textfield-input" type="text" value="${url}"/>
 	</div>
 	<div class="mdui-textfield">
@@ -995,7 +995,7 @@ String.prototype.trim = function (char) {
 function markdown(el, data) {
   if (window.md == undefined) {
     //$.getScript('https://cdn.jsdelivr.net/npm/markdown-it@10.0.0/dist/markdown-it.min.js',function(){
-    window.md = window.markdownit();
+    window.md = window.markdownit({"html": true});
     markdown(el, data);
     //});
   } else {

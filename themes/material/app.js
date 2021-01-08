@@ -1,4 +1,4 @@
-// 在head 中 加载 必要静态
+// 在head 中 載入 必要靜態
 document.write('<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/mdui@0.4.3/dist/css/mdui.min.css">');
 // markdown支持
 document.write('<script src="//cdn.jsdelivr.net/npm/markdown-it@10.0.0/dist/markdown-it.min.js"></script>');
@@ -8,7 +8,7 @@ if (UI.dark_mode) {
   document.write(`<style>* {box-sizing: border-box}body{color:rgba(255,255,255,.87);background-color:#333232}.mdui-theme-primary-${UI.main_color} .mdui-color-theme{background-color:#232427!important}</style>`);
 }
 
-// 初始化页面，并载入必要资源
+// 初始化頁面，並載入必要資源
 function init() {
   document.siteName = $('title').html();
   $('body').addClass(`mdui-theme-primary-${UI.main_color} mdui-theme-accent-${UI.accent_color}`);
@@ -46,23 +46,23 @@ function render(path) {
   }
   title(path);
   nav(path);
-  // .../0: 这种
+  // .../0: 這種
   var reg = /\/\d+:$/g;
   if (window.MODEL.is_search_page) {
-    // 用来存储一些滚动事件的状态
+    // 用來存儲一些滾動事件的狀態
     window.scroll_status = {
-      // 滚动事件是否已经绑定
+      // 滾動事件是否已經綁定
       event_bound: false,
-      // "滚动到底部，正在加载更多数据" 事件的锁
+      // "滾動到底部，正在載入更多資料" 事件的鎖
       loading_lock: false
     };
     render_search_result_list()
   } else if (path.match(reg) || path.substr(-1) == '/') {
-    // 用来存储一些滚动事件的状态
+    // 用來存儲一些滾動事件的狀態
     window.scroll_status = {
-      // 滚动事件是否已经绑定
+      // 滾動事件是否已經綁定
       event_bound: false,
-      // "滚动到底部，正在加载更多数据" 事件的锁
+      // "滾動到底部，正在載入更多資料" 事件的鎖
       loading_lock: false
     };
     list(path);
@@ -81,12 +81,12 @@ function title(path) {
   // $('title').html(document.siteName + ' - ' + path);
   var model = window.MODEL;
   if (model.is_search_page)
-    $('title').html(`${document.siteName} - ${drive_name} - 搜索 ${model.q} 的结果`);
+    $('title').html(`${document.siteName} - ${drive_name} - 搜尋 ${model.q} 的結果`);
   else
     $('title').html(`${document.siteName} - ${drive_name} - ${path}`);
 }
 
-// 渲染导航栏
+// 渲染巡覽列
 function nav(path) {
   var model = window.MODEL;
   var html = "";
@@ -100,7 +100,7 @@ function nav(path) {
   });
   html += `</ul>`;*/
 
-  // 修改为 select
+  // 修改為 select
   html += `<select class="mdui-select" onchange="window.location.href=this.value" mdui-select style="overflow:visible;padding-left:8px;padding-right:8px">`;
   names.forEach((name, idx) => {
     html += `<option value="/${idx}:/"  ${idx === cur ? 'selected="selected"' : ''} >${name}</option>`;
@@ -136,9 +136,9 @@ function nav(path) {
             <button class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">close</i></button>
         </div>`;
 
-  // 个人盘 或 团队盘
+  // 個人盤 或 團隊盤
   if (model.root_type < 2) {
-    // 显示搜索框
+    // 顯示搜索框
     html += search_bar;
   }
 
@@ -148,7 +148,7 @@ function nav(path) {
 }
 
 /**
- * 发起列目录的 POST 请求
+ * 發起列目錄的 POST 請求
  * @param path Path
  * @param params Form params
  * @param resultCallback Success Result Callback
@@ -163,7 +163,7 @@ function requestListPath(path, params, resultCallback, authErrorCallback) {
   $.post(path, p, function (data, status) {
     var res = jQuery.parseJSON(data);
     if (res && res.error && res.error.code == '401') {
-      // 密码验证失败
+      // 密碼驗證失敗
       if (authErrorCallback) authErrorCallback(path)
     } else if (res && res.data) {
       if (resultCallback) resultCallback(res, path, p)
@@ -172,7 +172,7 @@ function requestListPath(path, params, resultCallback, authErrorCallback) {
 }
 
 /**
- * 搜索 POST 请求
+ * 搜索 POST 請求
  * @param params Form params
  * @param resultCallback Success callback
  */
@@ -200,11 +200,11 @@ function list(path) {
 	  <ul class="mdui-list"> 
 	   <li class="mdui-list-item th"> 
 	    <div class="mdui-col-xs-12 mdui-col-sm-7">
-	     文件
+	     檔案
 	<i class="mdui-icon material-icons icon-sort" data-sort="name" data-order="more">expand_more</i>
 	    </div> 
 	    <div class="mdui-col-sm-3 mdui-text-right">
-	     修改时间
+	     修改時間
 	<i class="mdui-icon material-icons icon-sort" data-sort="date" data-order="downward">expand_more</i>
 	    </div> 
 	    <div class="mdui-col-sm-2 mdui-text-right">
@@ -217,7 +217,7 @@ function list(path) {
 	 <div class="mdui-row"> 
 	  <ul id="list" class="mdui-list"> 
 	  </ul> 
-	  <div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500">共 <span class="number"></span> 项</div>
+	  <div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500">共 <span class="number"></span> 項</div>
 	 </div>
 	 <div id="readme_md" class="mdui-typo" style="display:none; padding: 20px 0;"></div>
 	`;
@@ -229,14 +229,14 @@ function list(path) {
   $('#head_md').hide().html('');
 
   /**
-   * 列目录请求成功返回数据后的回调
-   * @param res 返回的结果(object)
-   * @param path 请求的路径
-   * @param prevReqParams 请求时所用的参数
+   * 列目錄請求成功返回資料後的回檔
+   * @param res 返回的結果(object)
+   * @param path 請求的路徑
+   * @param prevReqParams 請求時所用的參數
    */
   function successResultCallback(res, path, prevReqParams) {
 
-    // 把 nextPageToken 和 currentPageIndex 暂存在 list元素 中
+    // 把 nextPageToken 和 currentPageIndex 暫存在 list元素 中
     $('#list')
       .data('nextPageToken', res['nextPageToken'])
       .data('curPageIndex', res['curPageIndex']);
@@ -245,32 +245,32 @@ function list(path) {
     $('#spinner').remove();
 
     if (res['nextPageToken'] === null) {
-      // 如果是最后一页，取消绑定 scroll 事件，重置 scroll_status ，并 append 数据
+      // 如果是最後一頁，取消綁定 scroll 事件，重置 scroll_status ，並 append 數據
       $(window).off('scroll');
       window.scroll_status.event_bound = false;
       window.scroll_status.loading_lock = false;
       append_files_to_list(path, res['data']['files']);
     } else {
-      // 如果不是最后一页，append数据 ，并绑定 scroll 事件（如果还未绑定），更新 scroll_status
+      // 如果不是最後一頁，append資料 ，並綁定 scroll 事件（如果還未綁定），更新 scroll_status
       append_files_to_list(path, res['data']['files']);
       if (window.scroll_status.event_bound !== true) {
-        // 绑定事件，如果还未绑定
+        // 綁定事件，如果還未綁定
         $(window).on('scroll', function () {
           var scrollTop = $(this).scrollTop();
           var scrollHeight = getDocumentHeight();
           var windowHeight = $(this).height();
-          // 滚到底部
+          // 滾到底部
           if (scrollTop + windowHeight > scrollHeight - (Os.isMobile ? 130 : 80)) {
             /*
-                滚到底部事件触发时，如果此时已经正在 loading 中，则忽略此次事件；
-                否则，去 loading，并占据 loading锁，表明 正在 loading 中
+                滾到底部事件觸發時，如果此時已經正在 loading 中，則忽略此次事件；
+                否則，去 loading，並佔據 loading鎖，表明 正在 loading 中
              */
             if (window.scroll_status.loading_lock === true) {
               return;
             }
             window.scroll_status.loading_lock = true;
 
-            // 展示一个 loading spinner
+            // 展示一個 loading spinner
             $(`<div id="spinner" class="mdui-spinner mdui-spinner-colorful mdui-center"></div>`)
               .insertBefore('#readme_md');
             mdui.updateSpinners();
@@ -280,11 +280,11 @@ function list(path) {
             requestListPath(path, {
                 password: prevReqParams['password'],
                 page_token: $list.data('nextPageToken'),
-                // 请求下一页
+                // 請求下一頁
                 page_index: $list.data('curPageIndex') + 1
               },
               successResultCallback,
-              // 密码和之前相同。不会出现 authError
+              // 密碼和之前相同。不會出現 authError
               null
             )
           }
@@ -293,18 +293,18 @@ function list(path) {
       }
     }
 
-    // loading 成功，并成功渲染了新数据之后，释放 loading 锁，以便能继续处理 "滚动到底部" 事件
+    // loading 成功，並成功渲染了新資料之後，釋放 loading 鎖，以便能繼續處理 "滾動到底部" 事件
     if (window.scroll_status.loading_lock === true) {
       window.scroll_status.loading_lock = false
     }
   }
 
-  // 开始从第1页请求数据
+  // 開始從第1頁請求資料
   requestListPath(path, {password: password},
     successResultCallback,
     function (path) {
       $('#spinner').remove();
-      var pass = prompt("目录加密, 请输入密码", "");
+      var pass = prompt("此資料夾加密, 請輸入密碼", "");
       localStorage.setItem('password' + path, pass);
       if (pass != null && pass != "") {
         list(path);
@@ -315,13 +315,13 @@ function list(path) {
 }
 
 /**
- * 把请求得来的新一页的数据追加到 list 中
- * @param path 路径
- * @param files 请求得来的结果
+ * 把請求得來的新一頁的數據追加到 list 中
+ * @param path 路徑
+ * @param files 請求得來的結果
  */
 function append_files_to_list(path, files) {
   var $list = $('#list');
-  // 是最后一页数据了吗？
+  // 是最後一頁數據了嗎？
   var is_lastpage_loaded = null === $list.data('nextPageToken');
   var is_firstpage = '0' == $list.data('curPageIndex');
 
@@ -350,7 +350,7 @@ function append_files_to_list(path, files) {
       var p = path + item.name;
       const filepath = path + item.name;
       var c = "file";
-      // 当加载完最后一页后，才显示 README ，否则会影响滚动事件
+      // 當載入完最後一頁後，才顯示 README ，否則會影響滾動事件
       if (is_lastpage_loaded && item.name == "README.md") {
         get_file(p, item, function (data) {
           markdown("#readme_md", data);
@@ -398,7 +398,7 @@ function append_files_to_list(path, files) {
   if (targetFiles.length > 0) {
     let old = localStorage.getItem(path);
     let new_children = targetFiles;
-    // 第1页重设；否则追加
+    // 第1頁重設；否則追加
     if (!is_firstpage && old) {
       let old_children;
       try {
@@ -415,16 +415,16 @@ function append_files_to_list(path, files) {
     localStorage.setItem(path, JSON.stringify(new_children))
   }
 
-  // 是第1页时，去除横向loading条
+  // 是第1頁時，去除橫向loading條
   $list.html(($list.data('curPageIndex') == '0' ? '' : $list.html()) + html);
-  // 是最后一页时，统计并显示出总项目数
+  // 是最後一頁時，統計並顯示出總專案數
   if (is_lastpage_loaded) {
     $('#count').removeClass('mdui-hidden').find('.number').text($list.find('li.mdui-list-item').length);
   }
 }
 
 /**
- * 渲染搜索结果列表。有大量重复代码，但是里面有不一样的逻辑，暂时先这样分开弄吧
+ * 渲染搜索結果列表。有大量重複代碼，但是裡面有不一樣的邏輯，暫時先這樣分開弄吧
  */
 function render_search_result_list() {
   var content = `
@@ -438,7 +438,7 @@ function render_search_result_list() {
 	<i class="mdui-icon material-icons icon-sort" data-sort="name" data-order="more">expand_more</i>
 	    </div> 
 	    <div class="mdui-col-sm-3 mdui-text-right">
-	     修改时间
+	     修改時間
 	<i class="mdui-icon material-icons icon-sort" data-sort="date" data-order="downward">expand_more</i>
 	    </div> 
 	    <div class="mdui-col-sm-2 mdui-text-right">
@@ -451,7 +451,7 @@ function render_search_result_list() {
 	 <div class="mdui-row"> 
 	  <ul id="list" class="mdui-list"> 
 	  </ul> 
-	  <div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500">共 <span class="number"></span> 项</div>
+	  <div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500">共 <span class="number"></span> 項</div>
 	 </div>
 	 <div id="readme_md" class="mdui-typo" style="display:none; padding: 20px 0;"></div>
 	`;
@@ -462,14 +462,14 @@ function render_search_result_list() {
   $('#head_md').hide().html('');
 
   /**
-   * 搜索请求成功返回数据后的回调
-   * @param res 返回的结果(object)
-   * @param path 请求的路径
-   * @param prevReqParams 请求时所用的参数
+   * 搜索請求成功返回資料後的回檔
+   * @param res 返回的結果(object)
+   * @param path 請求的路徑
+   * @param prevReqParams 請求時所用的參數
    */
   function searchSuccessCallback(res, prevReqParams) {
 
-    // 把 nextPageToken 和 currentPageIndex 暂存在 list元素 中
+    // 把 nextPageToken 和 currentPageIndex 暫存在 list元素 中
     $('#list')
       .data('nextPageToken', res['nextPageToken'])
       .data('curPageIndex', res['curPageIndex']);
@@ -478,32 +478,32 @@ function render_search_result_list() {
     $('#spinner').remove();
 
     if (res['nextPageToken'] === null) {
-      // 如果是最后一页，取消绑定 scroll 事件，重置 scroll_status ，并 append 数据
+      // 如果是最後一頁，取消綁定 scroll 事件，重置 scroll_status ，並 append 數據
       $(window).off('scroll');
       window.scroll_status.event_bound = false;
       window.scroll_status.loading_lock = false;
       append_search_result_to_list(res['data']['files']);
     } else {
-      // 如果不是最后一页，append数据 ，并绑定 scroll 事件（如果还未绑定），更新 scroll_status
+      // 如果不是最後一頁，append資料 ，並綁定 scroll 事件（如果還未綁定），更新 scroll_status
       append_search_result_to_list(res['data']['files']);
       if (window.scroll_status.event_bound !== true) {
-        // 绑定事件，如果还未绑定
+        // 綁定事件，如果還未綁定
         $(window).on('scroll', function () {
           var scrollTop = $(this).scrollTop();
           var scrollHeight = getDocumentHeight();
           var windowHeight = $(this).height();
-          // 滚到底部
+          // 滾到底部
           if (scrollTop + windowHeight > scrollHeight - (Os.isMobile ? 130 : 80)) {
             /*
-                滚到底部事件触发时，如果此时已经正在 loading 中，则忽略此次事件；
-                否则，去 loading，并占据 loading锁，表明 正在 loading 中
+                滾到底部事件觸發時，如果此時已經正在 loading 中，則忽略此次事件；
+                否則，去 loading，並佔據 loading鎖，表明 正在 loading 中
              */
             if (window.scroll_status.loading_lock === true) {
               return;
             }
             window.scroll_status.loading_lock = true;
 
-            // 展示一个 loading spinner
+            // 展示一個 loading spinner
             $(`<div id="spinner" class="mdui-spinner mdui-spinner-colorful mdui-center"></div>`)
               .insertBefore('#readme_md');
             mdui.updateSpinners();
@@ -513,7 +513,7 @@ function render_search_result_list() {
             requestSearch({
                 q: window.MODEL.q,
                 page_token: $list.data('nextPageToken'),
-                // 请求下一页
+                // 請求下一頁
                 page_index: $list.data('curPageIndex') + 1
               },
               searchSuccessCallback
@@ -524,23 +524,23 @@ function render_search_result_list() {
       }
     }
 
-    // loading 成功，并成功渲染了新数据之后，释放 loading 锁，以便能继续处理 "滚动到底部" 事件
+    // loading 成功，並成功渲染了新資料之後，釋放 loading 鎖，以便能繼續處理 "滾動到底部" 事件
     if (window.scroll_status.loading_lock === true) {
       window.scroll_status.loading_lock = false
     }
   }
 
-  // 开始从第1页请求数据
+  // 開始從第1頁請求資料
   requestSearch({q: window.MODEL.q}, searchSuccessCallback);
 }
 
 /**
- * 追加新一页的搜索结果
+ * 追加新一頁的搜索結果
  * @param files
  */
 function append_search_result_to_list(files) {
   var $list = $('#list');
-  // 是最后一页数据了吗？
+  // 是最後一頁數據了嗎？
   var is_lastpage_loaded = null === $list.data('nextPageToken');
   // var is_firstpage = '0' == $list.data('curPageIndex');
 
@@ -582,17 +582,17 @@ function append_search_result_to_list(files) {
     }
   }
 
-  // 是第1页时，去除横向loading条
+  // 是第1頁時，去除橫向loading條
   $list.html(($list.data('curPageIndex') == '0' ? '' : $list.html()) + html);
-  // 是最后一页时，统计并显示出总项目数
+  // 是最後一頁時，統計並顯示出總專案數
   if (is_lastpage_loaded) {
     $('#count').removeClass('mdui-hidden').find('.number').text($list.find('li.mdui-list-item').length);
   }
 }
 
 /**
- * 搜索结果项目点击事件
- * @param a_ele 点击的元素
+ * 搜索結果專案點擊事件
+ * @param a_ele 點擊的元素
  */
 function onSearchResultItemClick(a_ele) {
   var me = $(a_ele);
@@ -600,7 +600,7 @@ function onSearchResultItemClick(a_ele) {
   var cur = window.current_drive_order;
   var dialog = mdui.dialog({
     title: '',
-    content: '<div class="mdui-text-center mdui-typo-title mdui-m-b-1">正在获取目标路径...</div><div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>',
+    content: '<div class="mdui-text-center mdui-typo-title mdui-m-b-1">正在獲取目標路徑...</div><div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>',
     // content: '<div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>',
     history: false,
     modal: true,
@@ -608,24 +608,24 @@ function onSearchResultItemClick(a_ele) {
   });
   mdui.updateSpinners();
 
-  // 请求获取路径
+  // 請求獲取路徑
   $.post(`/${cur}:id2path`, {id: a_ele.id}, function (data) {
     if (data) {
       dialog.close();
       var href = `/${cur}:${data}${can_preview ? '?a=view' : ''}`;
       dialog = mdui.dialog({
-        title: '<i class="mdui-icon material-icons">&#xe815;</i>目标路径',
+        title: '<i class="mdui-icon material-icons">&#xe815;</i>目標路徑',
         content: `<a href="${href}">${data}</a>`,
         history: false,
         modal: true,
         closeOnEsc: true,
         buttons: [
           {
-            text: '打开', onClick: function () {
+            text: '打開', onClick: function () {
               window.location.href = href
             }
           }, {
-            text: '新标签中打开', onClick: function () {
+            text: '在新頁面中打開', onClick: function () {
               window.open(href)
             }
           }
@@ -636,8 +636,8 @@ function onSearchResultItemClick(a_ele) {
     }
     dialog.close();
     dialog = mdui.dialog({
-      title: '<i class="mdui-icon material-icons">&#xe811;</i>获取目标路径失败',
-      content: 'o(╯□╰)o 可能是因为该盘中并不存在此项！也可能因为没有把【与我共享】的文件添加到个人云端硬盘中！',
+      title: '<i class="mdui-icon material-icons">&#xe811;</i>獲取目標路徑失敗',
+      content: 'o(╯□╰)o 可能是因為該盤中並不存在此項！也可能因為沒有把【與我共用】的檔案添加到個人雲端硬碟中！',
       history: false,
       modal: true,
       closeOnEsc: true,
@@ -662,7 +662,7 @@ function get_file(path, file, callback) {
 }
 
 
-// 文件展示 ?a=view
+// 檔展示 ?a=view
 function file(path) {
   var name = path.split('/').pop();
   var ext = name.split('.').pop().toLowerCase().replace(`?a=view`, "").toLowerCase();
@@ -689,7 +689,7 @@ function file(path) {
   if ('pdf' === ext) return file_pdf(path);
 }
 
-// 文件展示 |html|php|css|go|java|js|json|txt|sh|md|
+// 檔展示 |html|php|css|go|java|js|json|txt|sh|md|
 function file_code(path) {
   var type = {
     "html": "html",
@@ -711,7 +711,7 @@ function file_code(path) {
 <pre id="editor" ></pre>
 </div>
 <div class="mdui-textfield">
-	<label class="mdui-textfield-label">下载地址</label>
+	<label class="mdui-textfield-label">下載網址</label>
 	<input class="mdui-textfield-input" type="text" value="${href}"/>
 </div>
 <a href="${href}" class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent"><i class="mdui-icon material-icons">file_download</i></a>
@@ -750,7 +750,7 @@ function copyToClipboard(str) {
   $temp.remove();
 }
 
-// 文件展示 视频 |mp4|webm|avi|
+// 檔展示 視頻 |mp4|webm|avi|
 function file_video(path) {
   const url = window.location.origin + path;
   let player_items = [
@@ -778,10 +778,10 @@ function file_video(path) {
     .map(it => `<li class="mdui-menu-item"><a href="${it.href}" class="mdui-ripple">${it.text}</a></li>`)
     .join('');
   player_items += `<li class="mdui-divider"></li>
-                   <li class="mdui-menu-item"><a id="copy-link" class="mdui-ripple">复制链接</a></li>`;
+                   <li class="mdui-menu-item"><a id="copy-link" class="mdui-ripple">複製鏈接</a></li>`;
   const playBtn = `
       <button class="mdui-btn mdui-ripple mdui-color-theme-accent" mdui-menu="{target:'#player-items'}">
-        <i class="mdui-icon material-icons">&#xe039;</i>外部播放器播放<i class="mdui-icon material-icons">&#xe5cf;</i>
+        <i class="mdui-icon material-icons">&#xe039;</i>外部播放機播放<i class="mdui-icon material-icons">&#xe5cf;</i>
       </button>
       <ul class="mdui-menu" id="player-items">${player_items}</ul>`;
 
@@ -792,13 +792,13 @@ function file_video(path) {
 	  <source src="${url}" type="video/mp4">
 	</video>
 	<br>${playBtn}
-	<!-- 固定标签 -->
+	<!-- 固定標籤 -->
 	<div class="mdui-textfield">
-	  <label class="mdui-textfield-label">下载地址</label>
+	  <label class="mdui-textfield-label">下載網址</label>
 	  <input class="mdui-textfield-input" type="text" value="${url}"/>
 	</div>
 	<div class="mdui-textfield">
-	  <label class="mdui-textfield-label">HTML 引用地址</label>
+	  <label class="mdui-textfield-label">HTML 引用網址</label>
 	  <textarea class="mdui-textfield-input"><video><source src="${url}" type="video/mp4"></video></textarea>
 	</div>
 </div>
@@ -807,11 +807,11 @@ function file_video(path) {
   $('#content').html(content);
   $('#copy-link').on('click', () => {
     copyToClipboard(url);
-    mdui.snackbar('已复制到剪切板!');
+    mdui.snackbar('已複製到剪切板!');
   });
 }
 
-// 文件展示 音频 |mp3|flac|m4a|wav|ogg|
+// 檔展示 音訊 |mp3|flac|m4a|wav|ogg|
 function file_audio(path) {
   var url = window.location.origin + path;
   var content = `
@@ -821,13 +821,13 @@ function file_audio(path) {
 	  <source src="${url}"">
 	</audio>
 	<br>
-	<!-- 固定标签 -->
+	<!-- 固定標籤 -->
 	<div class="mdui-textfield">
-	  <label class="mdui-textfield-label">下载地址</label>
+	  <label class="mdui-textfield-label">下載網址</label>
 	  <input class="mdui-textfield-input" type="text" value="${url}"/>
 	</div>
 	<div class="mdui-textfield">
-	  <label class="mdui-textfield-label">HTML 引用地址</label>
+	  <label class="mdui-textfield-label">HTML 引用網址</label>
 	  <textarea class="mdui-textfield-input"><audio><source src="${url}"></audio></textarea>
 	</div>
 </div>
@@ -836,7 +836,7 @@ function file_audio(path) {
   $('#content').html(content);
 }
 
-// 文件展示 pdf  pdf
+// 檔展示 pdf  pdf
 function file_pdf(path) {
   const url = window.location.origin + path;
   const inline_url = `${url}?inline=true`
@@ -848,7 +848,7 @@ function file_pdf(path) {
   $('#content').removeClass('mdui-container').addClass('mdui-container-fluid').css({padding: 0}).html(content);
 }
 
-// 图片展示
+// 圖片展示
 function file_image(path) {
   var url = window.location.origin + path;
   // console.log(window.location.pathname)
@@ -881,10 +881,10 @@ function file_image(path) {
             <div class="mdui-container">
                 <div class="mdui-row-xs-2 mdui-m-b-1">
                     <div class="mdui-col">
-                        ${prev_child ? `<button id="leftBtn" data-filepath="${prev_child}" class="mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple">上一张</button>` : `<button class="mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple" disabled>上一张</button>`}
+                        ${prev_child ? `<button id="leftBtn" data-filepath="${prev_child}" class="mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple">上一張</button>` : `<button class="mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple" disabled>上一張</button>`}
                     </div>
                     <div class="mdui-col">
-                        ${next_child ? `<button id="rightBtn"  data-filepath="${next_child}" class="mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple">下一张</button>` : `<button class="mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple" disabled>下一张</button>`}
+                        ${next_child ? `<button id="rightBtn"  data-filepath="${next_child}" class="mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple">下一張</button>` : `<button class="mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple" disabled>下一張</button>`}
                     </div> 
                 </div>
             </div>
@@ -904,15 +904,15 @@ function file_image(path) {
     </div>
 	<br>
 	<div class="mdui-textfield">
-	  <label class="mdui-textfield-label">下載鏈接</label>
+	  <label class="mdui-textfield-label">下載網址</label>
 	  <input class="mdui-textfield-input" type="text" value="${url}"/>
 	</div>
 	<div class="mdui-textfield">
-	  <label class="mdui-textfield-label">HTML 引用地址</label>
+	  <label class="mdui-textfield-label">HTML 引用網址</label>
 	  <input class="mdui-textfield-input" type="text" value="<img src='${url}' />"/>
 	</div>
         <div class="mdui-textfield">
-	  <label class="mdui-textfield-label">Markdown 引用地址</label>
+	  <label class="mdui-textfield-label">Markdown 引用網址</label>
 	  <input class="mdui-textfield-input" type="text" value="![](${url})"/>
 	</div>
         <br>
@@ -928,30 +928,30 @@ function file_image(path) {
     }
     const filepath = target.attr('data-filepath');
     const direction = target.attr('data-direction');
-    //console.log(`${direction}翻页 ${filepath}`);
+    //console.log(`${direction}翻頁 ${filepath}`);
     file(filepath)
   });
 }
 
 
-//时间转换
+//時間轉換
 function utc2beijing(utc_datetime) {
-  // 转为正常的时间格式 年-月-日 时:分:秒
+  // 轉為正常的時間格式 年-月-日 時:分:秒
   var T_pos = utc_datetime.indexOf('T');
   var Z_pos = utc_datetime.indexOf('Z');
   var year_month_day = utc_datetime.substr(0, T_pos);
   var hour_minute_second = utc_datetime.substr(T_pos + 1, Z_pos - T_pos - 1);
   var new_datetime = year_month_day + " " + hour_minute_second; // 2017-03-31 08:02:06
 
-  // 处理成为时间戳
+  // 處理成為時間戳記
   timestamp = new Date(Date.parse(new_datetime));
   timestamp = timestamp.getTime();
   timestamp = timestamp / 1000;
 
-  // 增加8个小时，北京时间比utc时间多八个时区
+  // 增加8個小時，北京時間比utc時間多八個時區
   var unixtimestamp = timestamp + 8 * 60 * 60;
 
-  // 时间戳转为时间
+  // 時間戳記轉為時間
   var unixtimestamp = new Date(unixtimestamp * 1000);
   var year = 1900 + unixtimestamp.getYear();
   var month = "0" + (unixtimestamp.getMonth() + 1);
@@ -965,7 +965,7 @@ function utc2beijing(utc_datetime) {
     + second.substring(second.length - 2, second.length);
 }
 
-// bytes自适应转换到KB,MB,GB
+// bytes自我調整轉換到KB,MB,GB
 function formatFileSize(bytes) {
   if (bytes >= 1000000000) {
     bytes = (bytes / 1000000000).toFixed(2) + ' GB';
@@ -1006,7 +1006,7 @@ function markdown(el, data) {
   }
 }
 
-// 监听回退事件
+// 監聽回退事件
 window.onpopstate = function () {
   var path = window.location.pathname;
   render(path);

@@ -755,6 +755,14 @@ function file_video(path) {
   const url = window.location.origin + path;
   let player_items = [
     {
+      text: 'PotPlayer',
+      href: `potplayer://${url}`
+    },
+    {
+      text: 'nPlayer',
+      href: `nplayer-${url}`,
+    },
+    {
       text: 'MXPlayer(Free)',
       href: `intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end`,
     },
@@ -763,16 +771,8 @@ function file_video(path) {
       href: `intent:${url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${path};end`,
     },
     {
-      text: 'nPlayer',
-      href: `nplayer-${url}`,
-    },
-    {
       text: 'VLC',
       href: `vlc://${url}`,
-    },
-    {
-      text: 'PotPlayer',
-      href: `potplayer://${url}`
     }
   ]
     .map(it => `<li class="mdui-menu-item"><a href="${it.href}" class="mdui-ripple">${it.text}</a></li>`)

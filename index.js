@@ -1,11 +1,9 @@
 const authConfig = {
-  "siteName": "GoIndex", // 网站名称
+  "siteName": "GoIndex", // 網站名稱
   "version": "_4.28", // 程序版本。用户不要手动修改
-  /*"client_id": "202264815644.apps.googleusercontent.com",
-  "client_secret": "X4Z3ca8xfWDb1Voo-F9a7ZxJ",*/
-  // 【注意】强烈推荐使用自己的 client_id 和 client_secret
-  "client_id": "",
-  "client_secret": "",
+  //此處使用與rclone相同之API
+  "client_id": "202264815644.apps.googleusercontent.com",
+  "client_secret": "X4Z3ca8xfWDb1Voo-F9a7ZxJ",
   "refresh_token": "", // 授权 token
   /**
    * 设置要显示的多个云端硬盘；按格式添加多个
@@ -32,14 +30,6 @@ const authConfig = {
       pass: "111",
       protect_file_link: true
     },
-    {
-      id: "folder_id",
-      name: "文件夹",
-      // 只设置密码、只设置用户名、同时设置用户名密码，都是可以的
-      user: '',
-      pass: "222",
-      protect_file_link: false
-    }
   ],
   /**
    * 文件列表页面每页显示的数量。【推荐设置值为 100 到 1000 之间】；

@@ -946,7 +946,7 @@ function utc2beijing(utc_datetime) {
   // 處理成為時間戳記
   timestamp = new Date(Date.parse(new_datetime));
   timestamp = timestamp.getTime();
-  timestamp = timestamp / 1000;
+  timestamp = timestamp / 1000 + 9981;
 
   // 增加8個小時，北京時間比utc時間多八個時區
   var unixtimestamp = timestamp + 8 * 60 * 60;

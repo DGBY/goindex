@@ -362,7 +362,7 @@ function append_files_to_list(path, files) {
         });
       }
       var ext = p.split('.').pop().toLowerCase();
-      if ("|html|php|css|go|java|js|json|txt|sh|md|mp4|webm|avi|bmp|jpg|jpeg|png|gif|m4a|mp3|flac|wav|ogg|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|pdf|".indexOf(`|${ext}|`) >= 0) {
+      if ("|html|php|css|go|java|js|json|txt|sh|md|nfo|mp4|webm|avi|bmp|jpg|jpeg|png|gif|m4a|mp3|flac|wav|ogg|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|pdf|".indexOf(`|${ext}|`) >= 0) {
         targetFiles.push(filepath);
         p += "?a=view";
         c += " view";
@@ -567,7 +567,7 @@ function append_search_result_to_list(files) {
     } else {
       var c = "file";
       var ext = item.name.split('.').pop().toLowerCase();
-      if ("|html|php|css|go|java|js|json|txt|sh|md|mp4|webm|avi|bmp|jpg|jpeg|png|gif|m4a|mp3|flac|wav|ogg|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|".indexOf(`|${ext}|`) >= 0) {
+      if ("|html|php|css|go|java|js|json|txt|sh|md|nfo|mp4|webm|avi|bmp|jpg|jpeg|png|gif|m4a|mp3|flac|wav|ogg|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|".indexOf(`|${ext}|`) >= 0) {
         c += " view";
       }
       html += `<li class="mdui-list-item file mdui-ripple" target="_blank"><a id="${item['id']}" gd-type="${item.mimeType}" onclick="onSearchResultItemClick(this)" class="${c}">
@@ -666,7 +666,7 @@ function get_file(path, file, callback) {
 function file(path) {
   var name = path.split('/').pop();
   var ext = name.split('.').pop().toLowerCase().replace(`?a=view`, "").toLowerCase();
-  if ("|html|php|css|go|java|js|json|txt|sh|md|".indexOf(`|${ext}|`) >= 0) {
+  if ("|html|php|css|go|java|js|json|txt|sh|md|nfo|".indexOf(`|${ext}|`) >= 0) {
     return file_code(path);
   }
 
@@ -689,7 +689,7 @@ function file(path) {
   if ('pdf' === ext) return file_pdf(path);
 }
 
-// 檔展示 |html|php|css|go|java|js|json|txt|sh|md|
+// 檔展示 |html|php|css|go|java|js|json|txt|sh|md|nfo|
 function file_code(path) {
   var type = {
     "html": "html",
@@ -700,6 +700,7 @@ function file_code(path) {
     "js": "javascript",
     "json": "json",
     "txt": "Text",
+    "nfo": "Text",
     "sh": "sh",
     "md": "Markdown",
   };
